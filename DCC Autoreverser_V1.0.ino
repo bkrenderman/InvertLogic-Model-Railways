@@ -1,3 +1,4 @@
+  
 //Autoreverser 1.0 (2020-12-25)
 // Created by | InvertLogic (https://www.youtube.com/c/InvertLogic)
 // DCC Isolated Autoreversing Loop Circuit for Model railway
@@ -6,10 +7,10 @@
 
 
 #define acs712 A0 // define the analog input pin
-#define Trigger_Pin // pin connected to NPN transitor 
+#define Trigger_Pin 8 // pin connected to NPN transitor 
 
-float vpp = 0.0048828125;
-float sensitivity = 0.185;  //in mv
+float vpp = 0.0048828125; // measure voltage on your arduino and divide it with 1024 to get this value
+float sensitivity = 0.185;  //sensetivity of in mv
 
 void setup() {
   // put your setup code here, to run once:
@@ -27,7 +28,7 @@ float ampere = voltage / sensitivity; // divide by sensor sensetivity
   
   Serial.println("Amps: " + String (ampere)); 
 
-if (ampere > 1.0){ // if the current is more than 1 amp the the relay will switch (this is ok for N-scale but for HO you need to increase this)
+if (ampere > 1.0){ 
 
 digitalWrite(Trigger_Pin, !digitalRead(Trigger_Pin)); // toggle output
 delay(500); // wait to avoid false triggers
