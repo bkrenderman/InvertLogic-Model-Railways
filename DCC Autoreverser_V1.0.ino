@@ -14,10 +14,8 @@ float sensitivity = 0.185;  //in mv
 void setup() {
   // put your setup code here, to run once:
   pinMode(acs712, INPUT);
-  pinMode(8, OUTPUT);
+  pinMode(Trigger_Pin, OUTPUT);
   Serial.begin(115200);
-  //digitalWrite(8, HIGH);
-
 }
 
 void loop() {
@@ -29,9 +27,9 @@ float ampere = voltage / sensitivity; // divide by sensor sensetivity
   
   Serial.println("Amps: " + String (ampere)); 
 
-if (ampere > 1.0){
+if (ampere > 1.0){ // if the current is more than 1 amp the the relay will switch (this is ok for N-scale but for HO you need to increase this)
 
 digitalWrite(Trigger_Pin, !digitalRead(Trigger_Pin)); // toggle output
-delay(500);
+delay(500); // wait to avoid false triggers
   }
  }
